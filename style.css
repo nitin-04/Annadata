@@ -10,7 +10,7 @@
     align-items: end;
     justify-content: space-between;
     height: 120px;
-    z-index: 1000;
+    /* z-index: 1000; */
     width: 100%;
     top: 0;
     background-color: rgb(227, 233, 236);
