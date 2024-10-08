@@ -14,5 +14,5 @@ const RestaurantCart = (props) => {
         </div>
     )
 }
- 
+  ``
 export default RestaurantCart;

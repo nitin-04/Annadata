@@ -2,6 +2,7 @@ import RestaurantCart from "./Restaurantcart";  // Importing the RestaurantCart 
 // import resObj from "../utils/mockData";         // Importing mock restaurant data
 import { useState , useEffect} from "react";               // Importing useState from React to manage state
 // import { useEffect } from "react";
+import Shimmer from "./Shimmer"
 
 // The Body component renders the list of restaurants and provides a filter functionality
 const Body = () => {
@@ -22,8 +23,8 @@ const Body = () => {
     }
 
     if(ListofRestaurant.length === 0){
-        console.log("ADSasdfasd");
-        return <h1>Loadscsdvsdvsd</h1>
+        console.log("A");
+        return <Shimmer/>
     }
 
 
