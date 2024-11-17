@@ -22,7 +22,7 @@
     justify-content: space-between;
     z-index: 1000;
     color: rgb(81, 164, 192);
-    background-color: rgb(182, 196, 202);
+    background-color: rgb(190, 223, 237);
     /* border: 5px solid rgb(237, 245, 245); */
     box-sizing: border-box;
     opacity: 1;
@@ -67,6 +67,10 @@
                 cursor: pointer;
                 transform: scale(1.2);
             }
+        }
+        .login {
+            cursor: pointer;
+            padding: 10px 10px;
         }
     }
 }
@@ -163,11 +167,20 @@ html{
     color: #000;
 }
 
-.shimmer {
-    color: grey;
-    display: inline-block;
+.shimmer-container {
+    display: flex;
+    flex-wrap: wrap;
+
+    .shimmer-cart{
+
+        background-color: rgb(189, 176, 176);
+        /* display: inline-block; */
+        /* font-size: 50px; */
+        /* max-width: 200px; */
+        height: 350px;
+        width: 270px;
+        margin: 30px 11px;
+    }
     
     
-    font-size: 50px;
-    max-width: 200px;
   }

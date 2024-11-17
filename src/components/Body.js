@@ -2,12 +2,14 @@ import RestaurantCart from "./Restaurantcart";  // Importing the RestaurantCart 
 // import resObj from "../utils/mockData";         // Importing mock restaurant data
 import { useState , useEffect} from "react";               // Importing useState from React to manage state
 // import { useEffect } from "react";
-import Shimmer from "./Shimmer"
+import Shimmer from "./Shimmer";
 
 // The Body component renders the list of restaurants and provides a filter functionality
 const Body = () => {
     // useState hook to manage the list of restaurants (initially set to mock data)
     const [ListofRestaurant, setListofRestaurant] = useState([]);
+
+    const [searchText, setSearchText] = useState("");
 
     useEffect(() => {
         fetchData();
@@ -15,26 +17,44 @@ const Body = () => {
 
     const fetchData = async () => {
         const data = await fetch(
-            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.5729847&lng=77.32490430000001&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+           "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
         )
         const json = await data.json();
         console.log(json);
+        //Optional Chaining
         setListofRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
-    if(ListofRestaurant.length === 0){
-        console.log("A");
-        return <Shimmer/>
-    }
+    //Conditional Rendering
+    // if(ListofRestaurant.length === 0){
+    //     console.log("A");
+    //     return <Shimmer />
+    // }
 
 
-    return (
+    return ListofRestaurant.length === 0 ? (<Shimmer />) :(
         <div className="body">
-            {/* This div represents the search bar and filter functionality */}
             <div className="bar">
                 <div className="search">
+                    <input type="text" className="search-box"
+                    value = {searchText}
+                    onChange = {(e) => {
+                        setSearchText(e.target.value);
+                    }}
+                    />
+ 
+                    <button 
+                        onClick = {() => {
+                        const filteredRestaurant = ListofRestaurant.filter(
+                            (res) => res.info.name.includes(searchText) 
+                        );
+
+                        setListofRestaurant(filteredRestaurant);
+                    }}
+                    >
                     <h4>Search</h4>
-                    <h4>🔍</h4>  {/* Placeholder search icon, no functionality implemented */}
+                    <h4>🔍</h4></button>  {/* Placeholder search icon, no functionality implemented */}
+                    
                 </div>
 
                 {/* Filter button that filters restaurants with a rating > 4 */}
