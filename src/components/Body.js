@@ -1,6 +1,6 @@
 import RestaurantCart from "./Restaurantcart";  // Importing the RestaurantCart component
 // import resObj from "../utils/mockData";         // Importing mock restaurant data
-import { useState , useEffect} from "react";               // Importing useState from React to manage state
+import { useState, useEffect } from "react";               // Importing useState from React to manage state
 // import { useEffect } from "react";
 import Shimmer from "./Shimmer";
 
@@ -8,6 +8,7 @@ import Shimmer from "./Shimmer";
 const Body = () => {
     // useState hook to manage the list of restaurants (initially set to mock data)
     const [ListofRestaurant, setListofRestaurant] = useState([]);
+    const [filteredRestaurant, setFilteredRestaurat] = useState([]);
 
     const [searchText, setSearchText] = useState("");
 
@@ -17,12 +18,13 @@ const Body = () => {
 
     const fetchData = async () => {
         const data = await fetch(
-           "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+            "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
         )
         const json = await data.json();
         console.log(json);
         //Optional Chaining
         setListofRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
+        setFilteredRestaurat(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
     //Conditional Rendering
@@ -32,29 +34,29 @@ const Body = () => {
     // }
 
 
-    return ListofRestaurant.length === 0 ? (<Shimmer />) :(
+    return ListofRestaurant.length === 0 ? (<Shimmer />) : (
         <div className="body">
             <div className="bar">
                 <div className="search">
                     <input type="text" className="search-box"
-                    value = {searchText}
-                    onChange = {(e) => {
-                        setSearchText(e.target.value);
-                    }}
+                        value={searchText}
+                        onChange={(e) => {
+                            setSearchText(e.target.value);
+                        }}
                     />
- 
-                    <button 
-                        onClick = {() => {
-                        const filteredRestaurant = ListofRestaurant.filter(
-                            (res) => res.info.name.includes(searchText) 
-                        );
 
-                        setListofRestaurant(filteredRestaurant);
-                    }}
+                    <button
+                        onClick={() => {
+                            const filteredRestaurant = ListofRestaurant.filter(
+                                (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                            );
+
+                            setFilteredRestaurat(filteredRestaurant);
+                        }}
                     >
-                    <h4>Search</h4>
-                    <h4>🔍</h4></button>  {/* Placeholder search icon, no functionality implemented */}
-                    
+                        <h4>Search</h4>
+                        <h4>🔍</h4></button>  {/* Placeholder search icon, no functionality implemented */}
+
                 </div>
 
                 {/* Filter button that filters restaurants with a rating > 4 */}
@@ -62,24 +64,23 @@ const Body = () => {
                     <button
                         className="filter-btn"
                         onClick={() => {
-                            // Filter the list to include only restaurants with a rating greater than 4
                             const filterList = ListofRestaurant.filter(
-                                (res) => res.info.avgRating > 4.4
+                                (res) => res.info.avgRating > 4.0
                             );
-                            // Update the restaurant list with the filtered results
                             setListofRestaurant(filterList);
+                            setFilteredRestaurat(filterList);
                         }}
                     >
                         Filter
                     </button>
-                </div >
+                </div>
             </div>
 
             {/* The restaurant list rendered using the RestaurantCart component */}
             <div className="rest">
                 {
                     // Map over ListofRestaurant to create a RestaurantCart for each restaurant
-                    ListofRestaurant.map(rest => (
+                    filteredRestaurant.map(rest => (
                         <RestaurantCart
                             key={rest.info.id}    // Unique key for each restaurant
                             resData={rest}        // Passing restaurant data as props to RestaurantCart
