@@ -3,6 +3,7 @@ import RestaurantCart from "./Restaurantcart";  // Importing the RestaurantCart 
 import { useState, useEffect } from "react";               // Importing useState from React to manage state
 // import { useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 // The Body component renders the list of restaurants and provides a filter functionality
 const Body = () => {
@@ -80,11 +81,12 @@ const Body = () => {
             <div className="rest">
                 {
                     // Map over ListofRestaurant to create a RestaurantCart for each restaurant
-                    filteredRestaurant.map(rest => (
-                        <RestaurantCart
-                            key={rest.info.id}    // Unique key for each restaurant
-                            resData={rest}        // Passing restaurant data as props to RestaurantCart
-                        />
+                    filteredRestaurant.map((restaurant) => (
+                        <Link to="/restaurants/"> <RestaurantCart
+                        key={restaurant.info.id}    
+                        resData={restaurant}         
+                    /></Link>
+                       
                     ))
                 }
 
