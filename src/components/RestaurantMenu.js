@@ -12,18 +12,17 @@ const RestaurantMenu = () => {
     }, []);
 
     const fetchMenu = async () => {
-        const data = await fetch(MENU_API + resId + "&catalog_qa=undefined&submitAction=ENTER"
-        );
+        const data = await fetch(MENU_API + resId);
         const json = await data.json();
         console.log(json);
         setResInfo(json.data);
     };
 
-    if (resInfo === null) return <Shimmer />;
+    if (resInfo == null) return <Shimmer />;
 
-    const { name, cuisines, costForTwo } = resInfo?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants[0]?.info;
+    const {name, cuisines, costForTwo} = resInfo?.cards[2]?.card?.card?.info;
 
-    const { itemCards } = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card?.itemCards[0]?.card?.info;
+    const  itemCards  = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards;
 
     return (
         <div className="menu">
@@ -33,10 +32,10 @@ const RestaurantMenu = () => {
             </p>
             <h2>Menu</h2>
             <ul>
-                {itemCards.map((item) => (
-                    <li key={item.card.info.id}>
-                        {item.card.info.name} - {"Rs."}
-                        {item.card.info.price || item.card.info.defaultPrice / 100}
+                {itemCards.map((category) => (
+                    <li key={category.card.card.id}>
+                        {category.card.card.title} - {"Rs."}
+                        {category.card.card.price || category.card.card.defaultPrice / 100}
                     </li>
                 ))}
             </ul>

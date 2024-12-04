@@ -82,11 +82,13 @@ const Body = () => {
                 {
                     // Map over ListofRestaurant to create a RestaurantCart for each restaurant
                     filteredRestaurant.map((restaurant) => (
-                        <Link to="/restaurants/"> <RestaurantCart
-                        key={restaurant.info.id}    
-                        resData={restaurant}         
-                    /></Link>
-                       
+                        <Link
+                            key={restaurant.info.id}
+                            to={"/restaurants/" + restaurant.info.id}>
+                            <RestaurantCart
+                                resData={restaurant}
+                            /></Link>
+
                     ))
                 }
 
