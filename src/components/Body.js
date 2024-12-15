@@ -1,9 +1,8 @@
-import RestaurantCart from "./Restaurantcart";  // Importing the RestaurantCart component
-// import resObj from "../utils/mockData";         // Importing mock restaurant data
-import { useState, useEffect } from "react";               // Importing useState from React to manage state
-// import { useEffect } from "react";
+import RestaurantCart from "./Restaurantcart";  
+import { useState, useEffect } from "react";               
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 // The Body component renders the list of restaurants and provides a filter functionality
 const Body = () => {
@@ -20,13 +19,24 @@ const Body = () => {
     const fetchData = async () => {
         const data = await fetch(
             "https://www.swiggy.com/dapi/restaurants/list/v5?lat=19.0759837&lng=72.8776559&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-        )
+        );
+
         const json = await data.json();
         console.log(json);
+        
         //Optional Chaining
         setListofRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestaurat(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
+
+    const onlineStatus= useOnlineStatus();
+
+    if (onlineStatus == false)
+        return (
+            <h1>
+                No Internet Connection. Please check your internet connection and try again.
+            </h1>
+    );
 
     //Conditional Rendering
     // if(ListofRestaurant.length === 0){
