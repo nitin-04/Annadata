@@ -1,5 +1,5 @@
-import RestaurantCart from "./Restaurantcart";  
-import { useState, useEffect } from "react";               
+import RestaurantCart from "./Restaurantcart";
+import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
@@ -23,20 +23,20 @@ const Body = () => {
 
         const json = await data.json();
         console.log(json);
-        
+
         //Optional Chaining
         setListofRestaurant(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestaurat(json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     }
 
-    const onlineStatus= useOnlineStatus();
+    const onlineStatus = useOnlineStatus();
 
     if (onlineStatus == false)
         return (
             <h1>
                 No Internet Connection. Please check your internet connection and try again.
             </h1>
-    );
+        );
 
     //Conditional Rendering
     // if(ListofRestaurant.length === 0){
@@ -46,34 +46,37 @@ const Body = () => {
 
 
     return ListofRestaurant.length === 0 ? (<Shimmer />) : (
-        <div className="body">
-            <div className="bar">
-                <div className="search">
-                    <input type="text" className="search-box"
+        <div className="body pt-52 bg-gray-50 min-h-screen">
+            {/* Search and Filter Bar */}
+            <div className="bar flex flex-col md:flex-row justify-between items-center p-4 bg-white shadow-md rounded-lg mx-4 mb-6">
+                {/* Search Section */}
+                <div className="search flex items-center gap-4 m-4">
+                    <input
+                        type="text"
+                        className="w-full md:w-80 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        placeholder="Search for restaurants..."
                         value={searchText}
                         onChange={(e) => {
                             setSearchText(e.target.value);
                         }}
                     />
-
                     <button
+                        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition duration-300"
                         onClick={() => {
-                            const filteredRestaurant = ListofRestaurant.filter(
-                                (res) => res.info.name.toLowerCase().includes(searchText.toLowerCase())
+                            const filteredRestaurant = ListofRestaurant.filter((res) =>
+                                res.info.name.toLowerCase().includes(searchText.toLowerCase())
                             );
-
                             setFilteredRestaurat(filteredRestaurant);
                         }}
                     >
-                        <h4>Search</h4>
-                        <h4>🔍</h4></button>  {/* Placeholder search icon, no functionality implemented */}
-
+                        🔍 Search
+                    </button>
                 </div>
 
-                {/* Filter button that filters restaurants with a rating > 4 */}
-                <div className="filter">
+                {/* Filter Section */}
+                <div className="filter m-4">
                     <button
-                        className="filter-btn"
+                        className="px-5 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300"
                         onClick={() => {
                             const filterList = ListofRestaurant.filter(
                                 (res) => res.info.avgRating > 4.0
@@ -82,39 +85,31 @@ const Body = () => {
                             setFilteredRestaurat(filterList);
                         }}
                     >
-                        Filter
+                        ⭐ Filter Top Rated
                     </button>
                 </div>
             </div>
 
-            {/* The restaurant list rendered using the RestaurantCart component */}
-            <div className="rest">
-                {
-                    // Map over ListofRestaurant to create a RestaurantCart for each restaurant
+            {/* Restaurant Cards Section */}
+            <div className="restaurant-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center px-4 w-full">
+                {filteredRestaurant.length > 0 ? (
                     filteredRestaurant.map((restaurant) => (
                         <Link
                             key={restaurant.info.id}
-                            to={"/restaurants/" + restaurant.info.id}>
-                            <RestaurantCart
-                                resData={restaurant}
-                            /></Link>
-
+                            to={"/restaurants/" + restaurant.info.id}
+                            className="hover:scale-105 transition-transform duration-300"
+                        >
+                            <RestaurantCart resData={restaurant} />
+                        </Link>
                     ))
-                }
-
-                {/* 
-                Example hard-coded RestaurantCart instances, commented out 
-                These were likely used for static rendering before dynamic data was introduced
-
-                <RestaurantCart name="Jai Ganesh Bhojnalaya" rating="9.0" time=" 40-50" />
-                <RestaurantCart name="KFC" rating="6.5" time=" 49-59" />
-                <RestaurantCart name="Windeze" rating="7.0" time=" 20-30" />
-                <RestaurantCart name="Dominoz" rating="8.4" time=" 30-40 " />
-                <RestaurantCart name="Pizza Hut's" rating="5.7" time=" 45-55" />
-                <RestaurantCart name="Kishaan Farms" rating="9.0" time=" 30-45" />
-                */}
+                ) : (
+                    <div className="col-span-full text-center text-gray-600">
+                        <h2>No restaurants match your search criteria.</h2>
+                    </div>
+                )}
             </div>
-        </div >
+        </div>
+
     );
 }
 

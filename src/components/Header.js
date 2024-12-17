@@ -17,34 +17,62 @@ const Header = () => {
 
     // render the header component
     return (
-        <div className="header">
+        <div className="fixed top-0 left-0 w-full flex justify-between items-center px-2 py-0 shadow-lg bg-white z-50">
+            {/* Logo Container */}
             <div className="logo-container">
-                <img className="logo" src={LOGO} />
+                <img className="w-24 md:w-48" src={LOGO} alt="Logo" />
             </div>
-            <div className="nav-items">
-                <ul>
-                    <li>
-                        Online Status : {onlineStatus ? "🟢": "🔴"}
+
+            {/* Navigation Menu */}
+            <nav className="flex items-center">
+                <ul className="flex space-x-14 text-lg font-medium text-gray-700">
+                    <li className="flex items-center">
+                        Online Status: {onlineStatus ? "🟢" : "🔴"}
                     </li>
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link
+                            to="/"
+                            className="hover:text-blue-500 transition duration-300 ease-in-out"
+                        >
+                            Home
+                        </Link>
                     </li>
                     <li>
-                        <Link to="/about"> About Us</Link>
+                        <Link
+                            to="/about"
+                            className="hover:text-blue-500 transition duration-300 ease-in-out"
+                        >
+                            About Us
+                        </Link>
                     </li>
                     <li>
-                        <Link to="/contact">Contact</Link>
+                        <Link
+                            to="/contact"
+                            className="hover:text-blue-500 transition duration-300 ease-in-out"
+                        >
+                            Contact
+                        </Link>
                     </li>
-                    <li >Cart  </li><i class="fa-solid fa-cart-shopping"></i>
-                    <button className="login"
-                        onClick={() => {
-                            btnNameReact === "Login" ? setBtnNameReact("Logout") : setBtnNameReact("Login");
-                        }}
-                    >{btnNameReact}
-                    </button>
+                    <li className="flex items-center">
+                        <i className="fa-solid fa-cart-shopping text-xl mr-1"></i>
+                        Cart 
+                    </li>
                 </ul>
-            </div>
+
+                {/* Login/Logout Button */}
+                <button
+                    className="ml-6 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out"
+                    onClick={() => {
+                        btnNameReact === "Login"
+                            ? setBtnNameReact("Logout")
+                            : setBtnNameReact("Login");
+                    }}
+                >
+                    {btnNameReact}
+                </button>
+            </nav>
         </div>
+
     );
 };
 
