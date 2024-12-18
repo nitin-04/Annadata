@@ -17,7 +17,7 @@ const Header = () => {
 
     // render the header component
     return (
-        <div className="fixed top-0 left-0 w-full flex justify-between items-center px-2 py-0 shadow-lg bg-white z-50">
+        <div className="sticky top-0 left-0 w-full flex justify-between items-center px-2 py-0 shadow-lg bg-white z-50">
             {/* Logo Container */}
             <div className="logo-container">
                 <img className="w-24 md:w-48" src={LOGO} alt="Logo" />
