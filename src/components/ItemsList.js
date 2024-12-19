@@ -1,6 +1,16 @@
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 import { CDN_URL } from "../utils/constants";
 const ItemList = ({ items }) => {
-    console.log(items);
+    // console.log(items);
+
+    const dispatch = useDispatch();
+  
+    const handleAddItem = (item) => {
+      dispatch(addItem(item));
+    }
+  
+  
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
   {items.map((item) => (
@@ -38,7 +48,10 @@ const ItemList = ({ items }) => {
         </p>
 
         {/* Add Button */}
-        <button className="block w-full text-center py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-300">
+        <button 
+        className="block w-full text-center py-2 bg-blue-500 text-white font-medium rounded-lg hover:bg-blue-600 transition duration-300"
+        onClick={() => handleAddItem(item)}
+        >
           Add +
         </button>
       </div>

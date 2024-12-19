@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { LOGO } from "../utils/constants";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useSelector } from "react-redux";
 
 const Header = () => {
     const [btnNameReact, setBtnNameReact] = useState("Login");
@@ -15,13 +16,17 @@ const Header = () => {
         console.log("use effect called");
     }, [btnNameReact]);
 
+
+    const cartItems = useSelector((store) => store.cart.items);
     // render the header component
     return (
         <div className="sticky top-0 left-0 w-full flex justify-between items-center px-2 py-0 shadow-lg bg-white z-50">
             {/* Logo Container */}
-            <div className="logo-container">
-                <img className="w-24 md:w-48" src={LOGO} alt="Logo" />
-            </div>
+            <Link to="/">
+                <div className="logo-container">
+                    <img className="w-24 md:w-48" src={LOGO} alt="Logo" />
+                </div>
+            </Link>
 
             {/* Navigation Menu */}
             <nav className="flex items-center">
@@ -53,9 +58,11 @@ const Header = () => {
                             Contact
                         </Link>
                     </li>
-                    <li className="flex items-center">
-                        <i className="fa-solid fa-cart-shopping text-xl mr-1"></i>
-                        Cart 
+                    <li className="flex items-center hover:text-blue-500 transition duration-300 ease-in-out">
+                        <Link to="/cart">
+                            <i className="fa-solid fa-cart-shopping text-xl mr-1"></i>
+                            Cart ({cartItems.length})
+                        </Link>
                     </li>
                 </ul>
 
