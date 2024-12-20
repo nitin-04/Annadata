@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anandata</title>
+    <title>Annadata</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="https://i.ibb.co/QY0YxLv/food-delivery-3027212.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -12,10 +12,21 @@
 </head>
 
 <body>
-    <div id="root">
-        <h1 style="color: rgb(78, 114, 181);">Error: We Fucked up🐽!!!</h1>
-
-    </div>
+    <div id="root" className="flex items-center justify-center min-h-screen bg-gray-50">
+        <div className="text-center bg-white shadow-lg rounded-lg p-8 max-w-lg">
+          <h1 className="text-3xl font-bold text-red-600 mb-4">Oops! Something went wrong!</h1>
+          <p className="text-gray-700 mb-6">
+            We encountered an unexpected issue. Our team is working to fix this. Please try again later.
+          </p>
+          <a
+            href="/"
+            className="inline-block bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300"
+          >
+            Go Back to Home
+          </a>
+        </div>
+      </div>
+      
 
     <script type="module" src="./src/App.js"></script>
 </body>
