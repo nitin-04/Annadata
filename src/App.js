@@ -1,4 +1,3 @@
-
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
@@ -18,8 +17,8 @@ const Applayout = () => {
             <div className="app">
                 <Header />
                 <Outlet />
-            </div>;
-        </Provider>
+            </div>
+        </Provider>  
     )
 };
 
@@ -50,10 +49,7 @@ const appRouter = createBrowserRouter([
             }
         ],
         errorElement: <Error />,
-
-
     },
-
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
