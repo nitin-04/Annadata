@@ -23,7 +23,7 @@ const ItemList = ({ items }) => {
   };
 
   return (
-    <div className="flex flex-col gap-6 p-6 bg-gray-50">
+    <div className="flex flex-col gap-6 p-6 bg-gray-100">
       {items.map((item) => (
         <div
           key={item.card.info.id}
