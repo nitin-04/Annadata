@@ -31,7 +31,7 @@ const ItemList = ({ items }) => {
         >
           {/* Left Section: Content */}
           <div className="flex-1 pr-4">
-            <h3 className="font-semibold text-lg text-gray-800 mb-1">
+            <h3 className="font-semibold text-lg text-gray-700 mb-1">
               {item.card.info.name}
             </h3>
             <div className="flex items-center mb-4 mt-6">
