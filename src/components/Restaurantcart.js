@@ -6,7 +6,7 @@ const RestaurantCart = (props) => {
     const { cloudinaryImageId, name, avgRating, cuisines, locality } = resData?.info;
 
     return (
-        <div className="m-1 p-1 w-[300px] bg-white shadow-md rounded-xl hover:shadow-lg hover:bg-gray-100 transition duration-300">
+        <div className="m-4 p-1  w-[300px] bg-white shadow-md rounded-xl hover:shadow-lg hover:bg-gray-100 transition duration-300">
             {/* Image Section */}
             <img
                 className="rounded-lg w-full h-[300px] object-cover"
