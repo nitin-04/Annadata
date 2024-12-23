@@ -10,17 +10,22 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./components/Cart";
+import Footer from "./components/Footer";
 
 const Applayout = () => {
     return (
         <Provider store={appStore}>
-            <div className="app">
+            <div className="app flex flex-col min-h-screen">
                 <Header />
-                <Outlet />
+                <main className="flex-grow">
+                    <Outlet />
+                </main>
+                <Footer />
             </div>
-        </Provider>  
-    )
+        </Provider>
+    );
 };
+
 
 const appRouter = createBrowserRouter([
     {
