@@ -2,7 +2,7 @@ const Shimmer = () => {
     return (
         <div className="p-6">
             {/* Shimmer Header */}
-            <div className="w-full h-8 bg-gray-300 rounded-md mb-4 animate-pulse"></div>
+            <div className="p-4 md:flex-row h-20 bg-gray-300 rounded-lg mb-6 mx-4 animate-pulse"></div>
             
             {/* Shimmer Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

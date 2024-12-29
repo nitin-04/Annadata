@@ -48,7 +48,7 @@ const Body = () => {
     return ListofRestaurant.length === 0 ? (<Shimmer />) : (
         <div className="body  bg-gray-50 min-h-screen">
             {/* Search and Filter Bar */}
-            <div className="bar flex flex-col md:flex-row justify-between items-center p-4 bg-white shadow-md rounded-lg mx-4 mb-6">
+            <div className="flex flex-col md:flex-row justify-between items-center p-4 bg-white shadow-md rounded-lg mx-4 mb-6">
                 {/* Search Section */}
                 <div className="search flex items-center gap-4 m-4">
                     <input
