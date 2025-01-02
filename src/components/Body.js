@@ -53,7 +53,7 @@ const Body = () => {
                 <div className="search flex items-center gap-4 m-4">
                     <input
                         type="text"
-                        className="w-full md:w-80 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        className="w-full px-8 py-2 rounded-full border focus:outline-none focus:ring-2 focus:ring-orange-500"
                         placeholder="Search for restaurants..."
                         value={searchText}
                         onChange={(e) => {

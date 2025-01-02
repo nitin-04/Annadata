@@ -32,12 +32,12 @@ const Header = () => {
             <nav className="flex items-center">
                 <ul className="flex space-x-14 text-lg font-medium text-gray-700">
                     <li className="flex items-center">
-                        Online Status: {onlineStatus ? "🟢" : "🔴"}
+                        Network: {onlineStatus ? "🟢" : "🔴"}
                     </li>
                     <li>
                         <Link
                             to="/"
-                            className="hover:text-blue-500 transition duration-300 ease-in-out"
+                            className="text-gray-700 hover:text-orange-500 transition-colors "
                         >
                             Home
                         </Link>
@@ -45,7 +45,7 @@ const Header = () => {
                     <li>
                         <Link
                             to="/about"
-                            className="hover:text-blue-500 transition duration-300 ease-in-out"
+                            className="text-gray-700 hover:text-orange-500 transition-colors"
                         >
                             About Us
                         </Link>
@@ -53,12 +53,12 @@ const Header = () => {
                     <li>
                         <Link
                             to="/contact"
-                            className="hover:text-blue-500 transition duration-300 ease-in-out"
+                            className="text-gray-700 hover:text-orange-500 transition-colors"
                         >
                             Contact
                         </Link>
                     </li>
-                    <li className="flex items-center hover:text-blue-500 transition duration-300 ease-in-out">
+                    <li className="text-gray-700 hover:text-orange-500 transition-colors">
                         <Link to="/cart">
                             <i className="fa-solid fa-cart-shopping text-xl mr-1"></i>
                             Cart ({cartItems.length})
@@ -68,7 +68,7 @@ const Header = () => {
 
                 {/* Login/Logout Button */}
                 <button
-                    className="ml-6 px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out"
+                    className="ml-6 px-4 py-2 bg-orange-500 text-white rounded-lg shadow hover:bg-orange-700 transition duration-300 ease-in-out "
                     onClick={() => {
                         btnNameReact === "Login"
                             ? setBtnNameReact("Logout")
